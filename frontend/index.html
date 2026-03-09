@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>AI Resume Screener</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="noise-overlay"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-mark">
+        <span class="logo-icon">◈</span>
+        <div class="logo-text">
+          <h1>RESUME<span class="accent">AI</span></h1>
+          <p class="tagline">Neural Match Analysis System</p>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="stat-pill">v2.0 PRO</div>
+        <div class="stat-pill pulse-dot">LIVE</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id='input-section'>
+      <div class='input-row'>
+        <div class='input-card'>
+          <div class="card-header">
+            <span class="card-icon">📄</span>
+            <label>RESUME INPUT</label>
+            <span class="char-count" id="resume-count">0 chars</span>
+          </div>
+          <textarea id='resume' placeholder='Paste your resume text here...' rows='12'
+            oninput="updateCount('resume','resume-count')"></textarea>
+        </div>
+        <div class='input-card'>
+          <div class="card-header">
+            <span class="card-icon">💼</span>
+            <label>JOB DESCRIPTION</label>
+            <span class="char-count" id="job-count">0 chars</span>
+          </div>
+          <textarea id='job-desc' placeholder='Paste job description here...' rows='12'
+            oninput="updateCount('job-desc','job-count')"></textarea>
+        </div>
+      </div>
+      <button id='analyze-btn'>
+        <span class="btn-inner">
+          <span class="btn-icon">⚡</span>
+          <span class="btn-text">ANALYZE MATCH</span>
+        </span>
+        <div class="btn-glow"></div>
+      </button>
+    </section>
+
+    <section id='results-section' class='hidden'>
+      <div class="results-grid">
+        <div class="visualizer-panel">
+          <div class="panel-label">NEURAL VISUALIZER</div>
+          <div id='canvas-container'></div>
+          <div class="score-ring-label">
+            <div id='score-value'></div>
+            <div id='match-label'></div>
+          </div>
+        </div>
+
+        <div class="data-panel">
+          <div class="advice-card">
+            <div class="advice-header">◉ AI ASSESSMENT</div>
+            <p id='advice-text'></p>
+          </div>
+
+          <div id='skills-panel'>
+            <div class="skills-section" id='matching-skills'></div>
+            <div class="skills-section" id='missing-skills'></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="score-bar-container">
+        <div class="bar-label">MATCH SCORE</div>
+        <div class="bar-track">
+          <div class="bar-fill" id="bar-fill"></div>
+          <div class="bar-markers">
+            <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src='app.js'></script>
+  <script>
+    function updateCount(id, countId) {
+      const len = document.getElementById(id).value.length;
+      document.getElementById(countId).textContent = len + ' chars';
+    }
+  </script>
+</body>
+</html>
